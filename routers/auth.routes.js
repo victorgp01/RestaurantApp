@@ -35,8 +35,6 @@ router.post(
   login
 );
 
-router.use(protect);
-
 router.get('/renew', renewToken);
 
 module.exports = {

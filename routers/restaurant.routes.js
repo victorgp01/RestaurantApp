@@ -10,7 +10,11 @@ const {
   deleteRestaurant,
   deleteReviewRestaurant,
 } = require('../controllers/restasurant.controller');
-const { protect, restrictTo } = require('../middlewares/auth.middleware');
+const {
+  protect,
+  restrictTo,
+  protectAccountOwner,
+} = require('../middlewares/auth.middleware');
 const {
   validRestaurantById,
   validReviewById,
@@ -65,6 +69,7 @@ router.patch(
     validReviewById,
     validRestaurantById,
     restrictTo('client'),
+    protectAccountOwner,
   ],
   updateReviewRestaurant
 );
@@ -79,6 +84,7 @@ router.delete(
   '/reviews/:restaurantid/:id',
   validRestaurantById,
   validReviewById,
+  protectAccountOwner,
   restrictTo('client'),
   deleteReviewRestaurant
 );
